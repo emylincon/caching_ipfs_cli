@@ -369,11 +369,11 @@ def getting_ready():
 
     mec_me = {'hostname': hostname, 'ip': my_ip}
 
-    cmd = "bash /home/mec/files_cache/hosts.sh {}/24 > names.txt".format(router_ip)
+    cmd = "bash /home/mec/files_cache/hosts.sh {}/24 > /home/mec/temp/names.txt".format(router_ip)
 
     os.system(cmd)
     mec_set = {my_ip, router_ip}
-    fr = open('names.txt', 'r')
+    fr = open('/home/mec/temp/names.txt', 'r')
 
     ips = []
     f1 = fr.readlines()
@@ -385,17 +385,21 @@ def getting_ready():
     available_host = set(ips) - mec_set
 
     for i in available_host:
-        c = paramiko.SSHClient()
+        try:
+            c = paramiko.SSHClient()
 
-        un = 'mec'
-        pw = 'password'
-        port = 22
+            un = 'mec'
+            pw = 'password'
+            port = 22
 
-        c.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        c.connect(i, port, un, pw)
-        cmd = ('echo "' + "'{}' : '{}'".format(hostname, my_ip) + '" >> /home/mec/files_cache/mec_list.txt')
+            c.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            c.connect(i, port, un, pw)
+            cmd = ('echo "' + "'{}' : '{}'".format(hostname, my_ip) + '" >> /home/mec/temp/mec_list.txt')
 
-        stdin, stdout, stderr = c.exec_command(cmd)
+            stdin, stdout, stderr = c.exec_command(cmd)
+        except:
+            print('connecting. . .')
+            print('make sure ssh is running on all MEC')
 
 
 def run_me():
@@ -403,16 +407,19 @@ def run_me():
     global request_no
 
     os.system('clear')
-    request_no = int(input('number of requests: '))
     server_ip = input('web server ip: ')
     n = int(input('number of web(html) contents: '))
+    request_no = int(input('number of requests: '))
     for i in range(1, n+1):
-        cmd = 'echo "{}/{}.html" >> web_test.txt'.format(server_ip, i)
+        cmd = 'echo "{}/{}.html" >> /home/mec/temp/web_test.txt'.format(server_ip, i)
         os.system(cmd)
+
     os.system('clear')
+
     print("getting ready to start. . .")
-    getting_ready()
+
     time.sleep(5)
+    getting_ready()
     os.system('clear')
     g = Figlet(font='bubble')
 
@@ -424,25 +431,21 @@ def run_me():
         s = input('Enter any key to start and "stop" to exit: ')
         if s == 'stop':
             print('\nProgramme Terminated')
-            print(freq)
             cache_performance()
-            os.system('rm /home/mec/files_cache/mec_list.txt')
-            os.system('rm /home/mec/files_cache/web_test.txt')
+            os.system('rm /home/mec/temp/*')
             break
         else:
             mec_str = ''
-            tr = open('/home/mec/files_cache/mec_list.txt', 'r')
+            tr = open('/home/mec/temp/mec_list.txt', 'r')
             tp = tr.readlines()
             for i in tp:
                 mec_str += i[0:-1] + ','
             mec = '{' + mec_str[0:-1] + '}'
             mec_list = ast.literal_eval(mec)
-
+            
             for i in range(30):
-                fr = open('web_test.txt', 'r')
-
+                fr = open('/home/mec/temp/web_test.txt', 'r')
                 t = fr.readlines()
-
                 v = random.randint(0, (len(t) - 1))
                 get_hash(t[v][0:-1])
                 fr.close()
@@ -450,7 +453,7 @@ def run_me():
             '''
 
             for v in ref:
-                fr = open('web_test.txt', 'r')
+                fr = open('/home/mec/temp/web_test.txt', 'r')
 
                 t = fr.readlines()
                 get_hash(t[v][0:-1])
