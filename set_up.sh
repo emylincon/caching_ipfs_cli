@@ -47,4 +47,4 @@ mv * ..
 python3 /home/mec/files_cache/refresh_db.py
 /etc/init.d/ssh start
 
-rm -r /home/mec/caching_ipfs_cli
+#rm -r /home/mec/caching_ipfs_cli
