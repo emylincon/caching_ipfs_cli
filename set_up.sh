@@ -21,6 +21,9 @@ apt install python3-psutil -y
 apt install python3-pyfiglet -y
 apt install python3-matplotlib -y
 apt install nmap -y
+apt install apt-utils -y
+apt install iputils-ping -y
+apt install net-tools -y
 
 clear
 
