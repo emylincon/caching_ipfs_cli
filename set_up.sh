@@ -8,18 +8,19 @@ echo 'setting up environment... '
 sleep 2
 apt install sqlite3 -y
 
-apt-get install nano -y
+apt install nano -y
 
-apt-get install curl -y
-apt-get install openssh-client -y
-apt-get install openssh-server -y
-apt-get install wget -y
-apt-get install iperf3 -y
-apt-get install python3 -y
-apt-get install python3-paramiko -y
-apt-get install python3-psutil -y
-apt-get install python3-pyfiglet -y
-apt-get install python3-matplotlib -y
+apt install curl -y
+apt install openssh-client -y
+apt install openssh-server -y
+apt install wget -y
+apt install iperf3 -y
+apt install python3 -y
+apt install python3-paramiko -y
+apt install python3-psutil -y
+apt install python3-pyfiglet -y
+apt install python3-matplotlib -y
+apt install nmap -y
 
 clear
 
