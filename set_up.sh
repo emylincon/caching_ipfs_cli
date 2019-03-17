@@ -22,13 +22,6 @@ apt-get install python3-pyfiglet -y
 apt-get install python3-matplotlib -y
 
 clear
-echo 'Preparing database'
-sleep 2
-
-mv * ..
-python3 /home/mec/files_cache/refresh_db.py
-/etc/init.d/ssh start
-clear
 
 echo 'database done!'
 echo 'setting up ipfs'
@@ -43,4 +36,15 @@ cd go-ipfs
 bash install.sh
 
 clear
-echo 'All done, Ready to use'
+echo 'IPFS done..'
+
+sleep 1.5
+clear
+echo 'Preparing database'
+sleep 2
+
+mv * ..
+python3 /home/mec/files_cache/refresh_db.py
+/etc/init.d/ssh start
+
+rm -r /home/mec/caching_ipfs_cli
