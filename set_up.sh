@@ -27,7 +27,6 @@ apt install net-tools -y
 
 clear
 
-echo 'database done!'
 echo 'setting up ipfs'
 sleep 1.5
 
@@ -35,8 +34,9 @@ wget https://dist.ipfs.io/go-ipfs/v0.4.18/go-ipfs_v0.4.18_linux-amd64.tar.gz
 
 tar xvfz go-ipfs_v0.4.18_linux-amd64.tar.gz
 
-sudo bash go-ipfs/install.sh
-
+cd go-ipfs
+sudo bash install.sh
+cd ..
 
 echo 'IPFS done..'
 
@@ -46,6 +46,7 @@ echo 'Preparing database'
 
 mv * ..
 python3 /home/mec/files_cache/refresh_db.py
+echo 'database done!'
 /etc/init.d/ssh start
 
 rm -r /home/mec/caching_ipfs_cli
