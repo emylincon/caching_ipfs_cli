@@ -41,25 +41,22 @@ running the ipfs daemon
 ------------------------
 
 `ipfs daemon`
-
-# to run in background
-ctrl z
-bg
-#######################
+* to run in background
+`ctrl z + bg`
 
 or 
 
 `ipfs daemon &`
 
-........................
+------------------------
 ### Add file to IPFS
-........................
+------------------------
 
 `ipfs add <file name>`
 
-........................
+------------------------
 ### delete a file
-........................
+------------------------
 
 `ipfs pin rm -r <hash id>`  
 `ipfs repo gc`
