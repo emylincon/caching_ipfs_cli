@@ -35,20 +35,17 @@ wget https://dist.ipfs.io/go-ipfs/v0.4.18/go-ipfs_v0.4.18_linux-amd64.tar.gz
 
 tar xvfz go-ipfs_v0.4.18_linux-amd64.tar.gz
 
-cd go-ipfs
+bash go-ipfs/install.sh
 
-bash install.sh
 
-clear
 echo 'IPFS done..'
 
-sleep 1.5
-clear
-echo 'Preparing database'
 sleep 2
+echo 'Preparing database'
+#sleep 2
 
 mv * ..
 python3 /home/mec/files_cache/refresh_db.py
 /etc/init.d/ssh start
 
-#rm -r /home/mec/caching_ipfs_cli
+rm -r /home/mec/caching_ipfs_cli
